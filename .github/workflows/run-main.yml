@@ -32,4 +32,5 @@ jobs:
 
       - name: Run main.py with input
         run: |
-          echo "${{ github.event.inputs.function }}" | python main.py
+          f="${{ github.event.inputs.function || 'x**3 - 6*x**2 + 9*x' }}"
+          echo "$f" | python main.py

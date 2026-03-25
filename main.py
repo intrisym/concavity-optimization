@@ -3,8 +3,12 @@ from sympy.parsing.sympy_parser import parse_expr
 
 # Creating the original equation 
 x, y = sym.symbols('x y')
-orig_func = input("f(x) = ")
-print("Original Function = ", orig_func)
+orig_func = input("f(x) = ").strip()
+if not orig_func:
+    orig_func = "x**3 - 6*x**2 + 9*x"
+    print("No function input provided; using default:", orig_func)
+else:
+    print("Original Function =", orig_func)
 orig_func = orig_func.replace(" ", "")
 # Convert the function such that sympy will recognize it 
 for i in range(0, len(orig_func) - 1):
