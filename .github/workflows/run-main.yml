@@ -1,0 +1,35 @@
+name: Run concavity-optimization script
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      function:
+        description: 'Function to analyze (f(x))'
+        required: true
+        default: 'x**3 - 6*x**2 + 9*x'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install sympy
+
+      - name: Run main.py with input
+        run: |
+          echo "${{ github.event.inputs.function }}" | python main.py
