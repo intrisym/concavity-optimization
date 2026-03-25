@@ -33,4 +33,5 @@ jobs:
       - name: Run main.py with input
         run: |
           f="${{ github.event.inputs.function || 'x**3 - 6*x**2 + 9*x' }}"
-          echo "$f" | python main.py
+          echo "Running main.py with f(x)=$f"
+          echo "$f" | python main.py | sed 's/^/[main.py] /'
