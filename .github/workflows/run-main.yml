@@ -34,4 +34,6 @@ jobs:
         run: |
           f="${{ github.event.inputs.function || 'x**3 - 6*x**2 + 9*x' }}"
           echo "Running main.py with f(x)=$f"
-          echo "$f" | python main.py | sed 's/^/[main.py] /'
+          echo "$f" | python main.py | sed 's/^/[main.py] /' | tee output.log
+          echo "### main.py output" >> "$GITHUB_STEP_SUMMARY"
+          sed 's/^/- /' output.log >> "$GITHUB_STEP_SUMMARY"
